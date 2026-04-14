@@ -28,10 +28,10 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
 .hdr p{color:rgba(255,255,255,.82);font-size:.78rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
 
 /* ── TABS ── */
-.nav{background:#fff;display:flex;padding:0 36px;gap:2px;
-  box-shadow:0 2px 14px rgba(255,152,0,.1);position:sticky;top:0;z-index:200}
-.tbtn{padding:15px 26px;border:none;background:transparent;font-family:'Nunito',sans-serif;
-  font-weight:700;font-size:.88rem;color:var(--textl);cursor:pointer;position:relative;
+.nav{background:#fff;display:flex;padding:0 20px;gap:2px;
+  box-shadow:0 2px 14px rgba(255,152,0,.1);position:sticky;top:0;z-index:200;overflow-x:auto}
+.tbtn{padding:14px 18px;border:none;background:transparent;font-family:'Nunito',sans-serif;
+  font-weight:700;font-size:.82rem;color:var(--textl);cursor:pointer;position:relative;
   transition:color .25s;letter-spacing:.3px;white-space:nowrap}
 .tbtn::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%) scaleX(0);
   width:75%;height:3px;background:var(--o500);border-radius:2px 2px 0 0;
@@ -115,6 +115,36 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
 .btn-next.on{opacity:1;pointer-events:all}
 .btn-next.on:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,152,0,.42)}
 
+/* ── LOADING ANIMATION ── */
+#loading-screen{display:none;text-align:center;padding:60px 20px}
+.ld-title{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--text);margin-bottom:8px}
+.ld-sub{color:var(--textm);font-size:.95rem;margin-bottom:48px}
+.dna-wrap{position:relative;width:120px;height:120px;margin:0 auto 40px}
+.dna-ring{position:absolute;inset:0;border-radius:50%;border:4px solid transparent}
+.dna-ring:nth-child(1){border-top-color:var(--o500);animation:spin 1.1s linear infinite}
+.dna-ring:nth-child(2){border-right-color:var(--o700);animation:spin 1.7s linear infinite reverse;inset:10px}
+.dna-ring:nth-child(3){border-bottom-color:var(--o300);animation:spin 2.2s linear infinite;inset:22px}
+.dna-core{position:absolute;inset:34px;background:linear-gradient(135deg,var(--o400),var(--o700));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  animation:pulse-core 1.4s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse-core{0%,100%{transform:scale(.9);opacity:.8}50%{transform:scale(1.1);opacity:1}}
+.ld-steps{display:grid;gap:12px;max-width:360px;margin:0 auto 36px}
+.ld-step{background:#fff;border-radius:12px;padding:13px 18px;display:flex;align-items:center;
+  gap:13px;box-shadow:var(--sh);opacity:0;transform:translateY(10px);transition:all .5s}
+.ld-step.done{opacity:1;transform:translateY(0)}
+.ld-step .st-ico{width:34px;height:34px;min-width:34px;border-radius:8px;
+  background:var(--o100);display:flex;align-items:center;justify-content:center;font-size:1rem;
+  transition:background .4s}
+.ld-step.done .st-ico{background:var(--o500)}
+.ld-step .st-txt{font-size:.86rem;font-weight:700;color:var(--textm);text-align:left}
+.ld-step .st-check{margin-left:auto;font-size:1.1rem;opacity:0;transition:opacity .4s}
+.ld-step.done .st-check{opacity:1}
+.ld-bar-wrap{background:var(--o100);border-radius:8px;height:10px;max-width:400px;margin:0 auto;overflow:hidden}
+.ld-bar{height:100%;background:linear-gradient(90deg,var(--o400),var(--o700));width:0;
+  border-radius:8px;transition:width .4s ease}
+.ld-pct{font-weight:800;color:var(--o700);font-size:1.05rem;margin-top:10px}
+
 /* ── RESULTS HERO ── */
 .rhero{background:linear-gradient(135deg,#FF9800 0%,#F57C00 100%);border-radius:22px;
   padding:38px;color:#fff;text-align:center;margin-bottom:28px;position:relative;overflow:hidden;
@@ -129,6 +159,13 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
 .rlow{background:rgba(255,255,255,.22);color:#fff}
 .rmod{background:rgba(255,220,0,.28);color:#FFF8E1}
 .rhig{background:rgba(255,80,50,.3);color:#FFCCBC}
+
+/* ── RISK GAUGE ── */
+.risk-gauge-wrap{background:#fff;border-radius:var(--r);padding:30px;box-shadow:var(--sh);margin-bottom:28px;text-align:center}
+.gauge-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--text);margin-bottom:20px}
+.gauge-svg{max-width:320px;display:block;margin:0 auto}
+.risk-pct-big{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700}
+.risk-pct-label{font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--textl);margin-top:4px}
 
 /* ── METRICS GRID ── */
 .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:28px}
@@ -207,6 +244,105 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
 .ffc h3{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:5px;color:var(--text)}
 .ffc p{color:var(--textm);font-size:.87rem;line-height:1.64}
 
+/* ── RECOMMENDATIONS TAB ── */
+.rec-hero{background:linear-gradient(135deg,#E65100,#FF9800,#FFA726);border-radius:22px;
+  padding:46px 38px;color:#fff;margin-bottom:28px;text-align:center;position:relative;overflow:hidden}
+.rec-hero::before{content:'';position:absolute;bottom:-60px;left:-40px;width:200px;height:200px;
+  background:rgba(255,255,255,.07);border-radius:50%}
+.rec-hero h2{font-family:'Playfair Display',serif;font-size:2.1rem;margin-bottom:10px;position:relative;z-index:1}
+.rec-hero p{opacity:.9;font-size:1rem;max-width:520px;margin:0 auto;line-height:1.65;position:relative;z-index:1}
+.rec-filter{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;justify-content:center}
+.rfbtn{padding:9px 20px;border-radius:50px;border:2px solid var(--o200);background:transparent;
+  font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;color:var(--textm);
+  cursor:pointer;transition:all .2s}
+.rfbtn.active,.rfbtn:hover{background:var(--o500);border-color:var(--o500);color:#fff}
+.rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-bottom:28px}
+.rec-card{background:#fff;border-radius:var(--r);padding:0;box-shadow:var(--sh);overflow:hidden;
+  transition:transform .3s,box-shadow .3s}
+.rec-card:hover{transform:translateY(-5px);box-shadow:var(--shl)}
+.rec-card-top{padding:20px 22px 16px;border-bottom:1px solid var(--o100)}
+.rec-card-cat{font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:1.2px;
+  color:var(--o700);margin-bottom:6px}
+.rec-card-icon{font-size:1.8rem;margin-bottom:10px}
+.rec-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--text);margin-bottom:6px}
+.rec-card .rec-desc{color:var(--textm);font-size:.86rem;line-height:1.6}
+.rec-card-bot{padding:16px 22px;background:var(--o50)}
+.rec-card-bot ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.rec-card-bot ul li{font-size:.82rem;color:var(--textm);padding-left:16px;position:relative;line-height:1.4}
+.rec-card-bot ul li::before{content:'✓';position:absolute;left:0;color:var(--o600);font-weight:900;font-size:.78rem}
+.treatment-section{background:#fff;border-radius:var(--r);padding:30px;box-shadow:var(--sh);margin-bottom:26px}
+.trt-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+.trt-card{border-radius:14px;padding:24px;border:2px solid var(--o100)}
+.trt-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--text);margin-bottom:12px}
+.trt-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.7rem;font-weight:900;
+  text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
+.trt-t1{background:#FFE0B2;color:#E65100}.trt-t2{background:#FFF9C4;color:#F57F17}
+.trt-both{background:#FFCCBC;color:#BF360C}.trt-prev{background:#C8E6C9;color:#2E7D32}
+.trt-card ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.trt-card ul li{font-size:.84rem;color:var(--textm);padding-left:16px;position:relative;line-height:1.45}
+.trt-card ul li::before{content:'▸';position:absolute;left:0;color:var(--o500)}
+.med-table{margin-top:20px}
+.med-table table{width:100%;border-collapse:collapse;font-size:.88rem}
+.med-table th{background:var(--o50);padding:11px 14px;text-align:left;font-weight:800;
+  font-size:.74rem;text-transform:uppercase;letter-spacing:.7px;color:var(--textm);border-bottom:2px solid var(--o100)}
+.med-table td{padding:11px 14px;border-bottom:1px solid var(--o50);color:var(--textm)}
+.med-table tr:hover td{background:var(--o50)}
+.action-plan{background:linear-gradient(135deg,#FFF8F0,#FFF3E0);border-radius:var(--r);
+  padding:28px;margin-bottom:26px;border:2px solid var(--o100)}
+.action-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:18px}
+.action-step{background:#fff;border-radius:12px;padding:18px;box-shadow:var(--sh);text-align:center}
+.action-step .step-num{width:36px;height:36px;background:linear-gradient(135deg,var(--o400),var(--o700));
+  color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:.92rem;margin:0 auto 10px}
+.action-step h4{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--text);margin-bottom:5px}
+.action-step p{font-size:.8rem;color:var(--textm);line-height:1.5}
+
+/* ── RESEARCHERS TAB ── */
+.res-hero{background:linear-gradient(135deg,#3E2723,#6D4C41,#A1887F);border-radius:22px;
+  padding:46px 38px;color:#fff;margin-bottom:28px;text-align:center;position:relative;overflow:hidden}
+.res-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;
+  background:rgba(255,152,0,.1);border-radius:50%}
+.res-hero h2{font-family:'Playfair Display',serif;font-size:2.1rem;margin-bottom:10px;position:relative;z-index:1}
+.res-hero p{opacity:.88;font-size:1rem;max-width:540px;margin:0 auto;line-height:1.65;position:relative;z-index:1}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.res-stat{background:#fff;border-radius:var(--r);padding:20px;box-shadow:var(--sh);text-align:center;
+  border-top:4px solid var(--o400)}
+.res-stat .rs-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--o700);line-height:1}
+.res-stat .rs-lbl{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.7px;
+  color:var(--textl);margin-top:5px}
+.res-block{background:#fff;border-radius:var(--r);padding:28px;box-shadow:var(--sh);margin-bottom:22px}
+.res-block h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--text);margin-bottom:16px;
+  padding-bottom:12px;border-bottom:2px solid var(--o100)}
+.alg-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+.alg-card{background:var(--o50);border-radius:12px;padding:18px;border:1px solid var(--o100)}
+.alg-card h4{font-family:'Playfair Display',serif;font-size:.98rem;color:var(--o800);margin-bottom:7px}
+.alg-card p{font-size:.82rem;color:var(--textm);line-height:1.55}
+.alg-card .alg-tag{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.8px;
+  color:var(--o700);margin-bottom:8px}
+.dataset-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--o50)}
+.dataset-row:last-child{border-bottom:none}
+.ds-icon{width:44px;height:44px;min-width:44px;background:var(--o100);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.ds-name{font-weight:800;font-size:.92rem;color:var(--text);margin-bottom:2px}
+.ds-desc{font-size:.8rem;color:var(--textm);line-height:1.4}
+.ds-tag{margin-left:auto;font-size:.7rem;font-weight:900;text-transform:uppercase;
+  letter-spacing:.7px;padding:4px 10px;border-radius:20px;background:var(--o100);color:var(--o800);white-space:nowrap}
+.biomarker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.bm-card{background:var(--o50);border-radius:12px;padding:18px;border-left:4px solid var(--o400)}
+.bm-card h4{font-weight:800;font-size:.88rem;color:var(--text);margin-bottom:5px}
+.bm-card .bm-range{font-size:.78rem;color:var(--o700);font-weight:700;margin-bottom:5px}
+.bm-card p{font-size:.78rem;color:var(--textm);line-height:1.5}
+.trend-list{display:flex;flex-direction:column;gap:14px}
+.trend-item{display:flex;gap:16px;align-items:flex-start;padding:14px;
+  background:var(--o50);border-radius:12px;border:1px solid var(--o100)}
+.trend-yr{min-width:52px;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;
+  color:var(--o700);padding-top:2px}
+.trend-item h4{font-weight:800;font-size:.9rem;color:var(--text);margin-bottom:3px}
+.trend-item p{font-size:.82rem;color:var(--textm);line-height:1.5}
+.cite-box{background:#3E2723;border-radius:12px;padding:18px 22px;color:#D7CCC8;
+  font-size:.8rem;line-height:1.7;font-family:monospace;margin-top:12px;word-break:break-word}
+.cite-box span{color:#FFB74D}
+
 /* ── DISCLAIMER ── */
 .disc{background:var(--o50);border-radius:12px;padding:14px 18px;font-size:.8rem;
   color:var(--textl);text-align:center;border:1px solid var(--o100);margin-top:22px}
@@ -215,21 +351,20 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
 .rtsec{text-align:center;padding:28px 0}
 
 /* ── RESPONSIVE ── */
-@media(max-width:620px){
-  .hdr{padding:14px 18px}.nav{padding:0 10px}.tbtn{padding:13px 12px;font-size:.8rem}
+@media(max-width:700px){
+  .hdr{padding:14px 18px}.nav{padding:0 6px}.tbtn{padding:12px 10px;font-size:.75rem}
   .wrap{padding:24px 15px}.qtxt{font-size:1.25rem}.sbanner{grid-template-columns:1fr;gap:12px}
-  .tcards{grid-template-columns:1fr}.snum{font-size:2rem}
-  .mgrid{grid-template-columns:1fr 1fr}
+  .tcards{grid-template-columns:1fr}.trt-grid{grid-template-columns:1fr}
+  .alg-grid{grid-template-columns:1fr}.res-stats{grid-template-columns:1fr 1fr}
+  .snum{font-size:2rem}.mgrid{grid-template-columns:1fr 1fr}
 }
-@media(max-width:400px){.mgrid{grid-template-columns:1fr}}
+@media(max-width:400px){.mgrid{grid-template-columns:1fr}.res-stats{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- FLOATING PARTICLES -->
 <div class="pts" id="pts"></div>
 
-<!-- HEADER -->
 <header class="hdr">
   <svg class="hdr-logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,.18)"/>
@@ -245,53 +380,41 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
   </div>
 </header>
 
-<!-- NAV -->
 <nav class="nav">
   <button class="tbtn active" data-tab="test">🩺 Diabetes Test</button>
-  <button class="tbtn" data-tab="facts">📋 Diabetes Facts</button>
+  <button class="tbtn" data-tab="facts">📋 Facts</button>
+  <button class="tbtn" data-tab="recs">💊 Recommendations</button>
+  <button class="tbtn" data-tab="research">🔬 Researchers</button>
   <button class="tbtn" data-tab="fun">✨ Fun Facts</button>
 </nav>
 
-<!-- ════════════ TAB 1: TEST ════════════ -->
+<!-- ═══ TAB 1: TEST ═══ -->
 <div class="tp active" id="tab-test">
 <div class="wrap">
 
-  <!-- INTRO -->
   <div id="intro">
     <div class="intro">
-
-      <!-- Animated SVG illustration -->
       <svg width="190" height="190" viewBox="0 0 190 190" style="display:block;margin:0 auto 28px">
         <circle cx="95" cy="95" r="88" fill="#FFE8CC"/>
         <circle cx="95" cy="95" r="70" fill="#FFF3E0" opacity=".7"/>
-
-        <!-- Body outline (simple person silhouette) -->
         <ellipse cx="95" cy="125" rx="36" ry="44" fill="#FFB74D" opacity=".5"/>
         <circle cx="95" cy="70" r="28" fill="#FFB74D" opacity=".6"/>
-
-        <!-- Animated heartbeat -->
         <path d="M40 95 L58 95 L64 78 L73 116 L81 84 L89 95 L150 95"
           stroke="#FF9800" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <animate attributeName="stroke-dasharray" from="0 250" to="250 0" dur="2.2s" repeatCount="indefinite"/>
         </path>
-
-        <!-- Blood drop -->
         <path d="M158 26C158 26 150 37 150 43C150 47.5 153.6 51 158 51C162.4 51 166 47.5 166 43C166 37 158 26 158 26Z"
           fill="#FF9800" opacity=".85">
           <animate attributeName="opacity" values=".85;.35;.85" dur="1.8s" repeatCount="indefinite"/>
           <animate attributeName="transform" attributeType="XML" type="translate" values="0 0;0 3;0 0" dur="1.8s" repeatCount="indefinite"/>
         </path>
-
-        <!-- Pulse rings -->
         <circle cx="95" cy="95" r="55" stroke="#FF9800" stroke-width="1.5" fill="none" opacity=".2">
           <animate attributeName="r" values="55;72;55" dur="2.5s" repeatCount="indefinite"/>
           <animate attributeName="opacity" values=".2;0;.2" dur="2.5s" repeatCount="indefinite"/>
         </circle>
       </svg>
-
       <h2>Know Your<br><em>Diabetes Risk Profile</em></h2>
-      <p>Answer 20 lifestyle &amp; health questions. We'll estimate 7 key clinical markers and give you a personalized risk assessment.</p>
-
+      <p>Answer 20 lifestyle &amp; health questions. We'll estimate 7 key clinical markers and give you a personalized risk assessment with a percentage risk score.</p>
       <div class="card" style="max-width:470px;margin:0 auto">
         <div class="fg">
           <label>Your Full Name</label>
@@ -308,7 +431,6 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
           </button>
         </div>
       </div>
-
       <div class="disc" style="margin-top:20px;max-width:500px;margin-left:auto;margin-right:auto">
         ⚠️ This tool provides <strong>estimated values only</strong> and is not a substitute for professional medical diagnosis. Consult a licensed physician for accurate results.
       </div>
@@ -327,28 +449,66 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
     </div>
   </div>
 
+  <!-- LOADING SCREEN -->
+  <div id="loading-screen">
+    <p class="ld-title">Analyzing Your Health Profile</p>
+    <p class="ld-sub">Our system is processing your 20 responses...</p>
+    <div class="dna-wrap">
+      <div class="dna-ring"></div>
+      <div class="dna-ring"></div>
+      <div class="dna-ring"></div>
+      <div class="dna-core">🧬</div>
+    </div>
+    <div class="ld-steps">
+      <div class="ld-step" id="ls1">
+        <div class="st-ico">📊</div>
+        <div class="st-txt">Processing lifestyle data</div>
+        <div class="st-check">✅</div>
+      </div>
+      <div class="ld-step" id="ls2">
+        <div class="st-ico">🧪</div>
+        <div class="st-txt">Estimating clinical markers</div>
+        <div class="st-check">✅</div>
+      </div>
+      <div class="ld-step" id="ls3">
+        <div class="st-ico">🧬</div>
+        <div class="st-txt">Analyzing genetic pedigree</div>
+        <div class="st-check">✅</div>
+      </div>
+      <div class="ld-step" id="ls4">
+        <div class="st-ico">🩺</div>
+        <div class="st-txt">Calculating risk score</div>
+        <div class="st-check">✅</div>
+      </div>
+      <div class="ld-step" id="ls5">
+        <div class="st-ico">📋</div>
+        <div class="st-txt">Generating your report</div>
+        <div class="st-check">✅</div>
+      </div>
+    </div>
+    <div class="ld-bar-wrap"><div class="ld-bar" id="lbar"></div></div>
+    <div class="ld-pct" id="lpct">0%</div>
+  </div>
+
   <!-- RESULTS SCREEN -->
   <div id="rscr" style="display:none"></div>
 
 </div>
 </div>
 
-<!-- ════════════ TAB 2: FACTS ════════════ -->
+<!-- ═══ TAB 2: FACTS ═══ -->
 <div class="tp" id="tab-facts">
 <div class="wrap">
-
   <div class="fhero">
     <div style="font-size:3rem;margin-bottom:12px;position:relative;z-index:1">🩸</div>
     <h2>Understanding Diabetes</h2>
     <p>Diabetes is a chronic metabolic condition affecting how your body processes blood glucose. Knowledge is your first — and most powerful — line of defense.</p>
   </div>
-
   <div class="sbanner">
     <div class="sitem"><div class="snum">537M</div><div class="slbl">Adults with diabetes worldwide (2021)</div></div>
     <div class="sitem"><div class="snum">1 in 2</div><div class="slbl">People with diabetes are undiagnosed</div></div>
     <div class="sitem"><div class="snum">$966B</div><div class="slbl">Global healthcare expenditure on diabetes</div></div>
   </div>
-
   <div class="fgrid">
     <div class="fcard"><div class="fi">🩸</div><h3>What is Blood Glucose?</h3><p>Blood glucose is the main sugar in your blood, derived from food you eat. It's your body's primary energy source. The pancreas produces insulin to help glucose enter cells for fuel.</p></div>
     <div class="fcard"><div class="fi">💉</div><h3>The Role of Insulin</h3><p>Insulin is a hormone made by the pancreas that acts like a key — unlocking cells so glucose can enter. In diabetes, this mechanism breaks down, leaving sugar stranded in the bloodstream.</p></div>
@@ -360,8 +520,6 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
     <div class="fcard"><div class="fi">🌏</div><h3>Southeast Asia's Rising Burden</h3><p>The Philippines and neighboring countries face rapidly increasing diabetes rates driven by urbanization, dietary shifts toward processed food, sedentary work, and reduced physical activity.</p></div>
     <div class="fcard"><div class="fi">💊</div><h3>Management Options</h3><p>Type 1 diabetes requires daily insulin therapy. Type 2 can often be managed with lifestyle changes, oral medications, and periodic insulin. Regular blood sugar monitoring is critical for all types.</p></div>
   </div>
-
-  <!-- Type 1 vs Type 2 -->
   <div class="csec">
     <div class="stitle" style="justify-content:center;font-size:1.5rem;margin-bottom:26px">⚖️ Type 1 vs Type 2 Diabetes</div>
     <div class="tcards">
@@ -391,106 +549,556 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
       </div>
     </div>
   </div>
-
-  <!-- Blood Sugar Scale SVG -->
   <div class="csec">
     <div class="stitle" style="justify-content:center;margin-bottom:28px">🩸 Fasting Blood Glucose Reference Ranges</div>
     <svg viewBox="0 0 640 200" width="100%" style="display:block;overflow:visible">
-      <!-- Track -->
       <rect x="40" y="80" width="560" height="24" rx="12" fill="#F5F5F5"/>
-
-      <!-- Normal band -->
       <rect x="40" y="80" width="200" height="24" rx="0" fill="#C8E6C9"/>
       <rect x="40" y="80" width="10" height="24" rx="12 0 0 12" fill="#C8E6C9"/>
-
-      <!-- Pre-diabetes band -->
       <rect x="240" y="80" width="160" height="24" fill="#FFF9C4"/>
-
-      <!-- Diabetes band -->
       <rect x="400" y="80" width="190" height="24" rx="0" fill="#FFCCBC"/>
       <rect x="590" y="80" width="10" height="24" rx="0 12 12 0" fill="#FFCCBC"/>
-
-      <!-- Labels above -->
       <text x="140" y="66" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="13" fill="#2E7D32">Normal</text>
       <text x="140" y="50" text-anchor="middle" font-family="Nunito" font-size="11" fill="#388E3C">70 – 99 mg/dL</text>
-
       <text x="320" y="66" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="13" fill="#F57F17">Pre-Diabetes</text>
       <text x="320" y="50" text-anchor="middle" font-family="Nunito" font-size="11" fill="#F9A825">100 – 125 mg/dL</text>
-
       <text x="495" y="66" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="13" fill="#BF360C">Diabetes</text>
       <text x="495" y="50" text-anchor="middle" font-family="Nunito" font-size="11" fill="#E64A19">126+ mg/dL</text>
-
-      <!-- Markers below -->
       <line x1="40" y1="110" x2="40" y2="130" stroke="#9E9E9E" stroke-width="1.5"/>
       <text x="40" y="145" text-anchor="middle" font-family="Nunito" font-size="11" fill="#9E9E9E">70</text>
-
       <line x1="240" y1="110" x2="240" y2="130" stroke="#9E9E9E" stroke-width="1.5"/>
       <text x="240" y="145" text-anchor="middle" font-family="Nunito" font-size="11" fill="#9E9E9E">100</text>
-
       <line x1="400" y1="110" x2="400" y2="130" stroke="#9E9E9E" stroke-width="1.5"/>
       <text x="400" y="145" text-anchor="middle" font-family="Nunito" font-size="11" fill="#9E9E9E">126</text>
-
       <line x1="600" y1="110" x2="600" y2="130" stroke="#9E9E9E" stroke-width="1.5"/>
       <text x="600" y="145" text-anchor="middle" font-family="Nunito" font-size="11" fill="#9E9E9E">200+</text>
-
-      <!-- Icons -->
       <text x="140" y="170" text-anchor="middle" font-size="20">✅</text>
       <text x="320" y="170" text-anchor="middle" font-size="20">⚠️</text>
       <text x="495" y="170" text-anchor="middle" font-size="20">🚨</text>
     </svg>
   </div>
-
   <div class="disc">📚 Sources: International Diabetes Federation (IDF), World Health Organization (WHO), American Diabetes Association (ADA)</div>
-
 </div>
 </div>
 
-<!-- ════════════ TAB 3: FUN FACTS ════════════ -->
+<!-- ═══ TAB 3: RECOMMENDATIONS ═══ -->
+<div class="tp" id="tab-recs">
+<div class="wrap">
+  <div class="rec-hero">
+    <div style="font-size:3rem;margin-bottom:12px;position:relative;z-index:1">💊</div>
+    <h2>Recommendations & Treatments</h2>
+    <p>Evidence-based lifestyle guidance, treatment options, and a personalized action plan to prevent or manage diabetes effectively.</p>
+  </div>
+
+  <!-- Filter buttons -->
+  <div class="rec-filter">
+    <button class="rfbtn active" onclick="filterRec('all',this)">All</button>
+    <button class="rfbtn" onclick="filterRec('lifestyle',this)">🌿 Lifestyle</button>
+    <button class="rfbtn" onclick="filterRec('diet',this)">🥗 Diet</button>
+    <button class="rfbtn" onclick="filterRec('exercise',this)">🏋️ Exercise</button>
+    <button class="rfbtn" onclick="filterRec('mental',this)">🧘 Mental Health</button>
+    <button class="rfbtn" onclick="filterRec('monitor',this)">📊 Monitoring</button>
+  </div>
+
+  <div class="rec-grid" id="rec-grid">
+    <div class="rec-card" data-cat="diet">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Diet</div>
+        <div class="rec-card-icon">🥗</div>
+        <h3>Low-Glycemic Eating Plan</h3>
+        <p class="rec-desc">Choose foods that release glucose slowly to keep blood sugar stable throughout the day.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Replace white rice with brown rice or cauliflower rice</li>
+          <li>Choose whole fruits over fruit juice</li>
+          <li>Add beans, lentils, or chickpeas to meals</li>
+          <li>Eat leafy greens with every meal</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rec-card" data-cat="diet">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Diet</div>
+        <div class="rec-card-icon">💧</div>
+        <h3>Hydration Strategy</h3>
+        <p class="rec-desc">Proper hydration directly affects blood glucose concentration and insulin sensitivity.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Drink 8–10 glasses of water daily</li>
+          <li>Replace sodas with sparkling water + citrus</li>
+          <li>Drink a glass of water before each meal</li>
+          <li>Limit sugary drinks and sweetened teas</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rec-card" data-cat="diet">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Diet</div>
+        <div class="rec-card-icon">🍽️</div>
+        <h3>Portion & Meal Timing</h3>
+        <p class="rec-desc">When and how much you eat matters as much as what you eat for blood sugar control.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Use the Plate Method: ½ veggies, ¼ protein, ¼ carbs</li>
+          <li>Eat at consistent times each day</li>
+          <li>Avoid skipping meals to prevent spikes</li>
+          <li>Limit late-night eating after 8 PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rec-card" data-cat="exercise">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Exercise</div>
+        <div class="rec-card-icon">🚶</div>
+        <h3>Daily Movement Goals</h3>
+        <p class="rec-desc">Even light activity significantly improves insulin sensitivity and glucose uptake in cells.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Walk 10 minutes after every meal</li>
+          <li>Aim for 150 min moderate exercise/week</li>
+          <li>Break up sitting every 30–45 minutes</li>
+          <li>Take stairs instead of elevators</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rec-card" data-cat="exercise">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Exercise</div>
+        <div class="rec-card-icon">🏋️</div>
+        <h3>Strength Training Benefits</h3>
+        <p class="rec-desc">Muscle tissue is the largest consumer of glucose — building it lowers long-term blood sugar.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Do resistance training 2–3×/week</li>
+          <li>Bodyweight squats, push-ups, and planks work</li>
+          <li>Resistance bands are effective and low-cost</li>
+          <li>Start light and build gradually</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rec-card" data-cat="lifestyle">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Lifestyle</div>
+        <div class="rec-card-icon">😴</div>
+        <h3>Sleep Optimization</h3>
+        <p class="rec-desc">Poor sleep raises cortisol and reduces insulin sensitivity — making it a major hidden risk factor.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Target 7–9 hours of quality sleep</li>
+          <li>Keep a consistent sleep/wake schedule</li>
+          <li>Avoid screens 1 hour before bed</li>
+          <li>Keep room cool (65–68°F / 18–20°C)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rec-card" data-cat="mental">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Mental Health</div>
+        <div class="rec-card-icon">🧘</div>
+        <h3>Stress Reduction Techniques</h3>
+        <p class="rec-desc">Chronic stress raises cortisol which directly elevates blood glucose — managing it is medical necessity.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Practice 5–10 min deep breathing daily</li>
+          <li>Try box breathing: 4-4-4-4 counts</li>
+          <li>Gentle yoga or tai chi weekly</li>
+          <li>Journaling to process daily stressors</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rec-card" data-cat="mental">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Mental Health</div>
+        <div class="rec-card-icon">🤝</div>
+        <h3>Social Support Networks</h3>
+        <p class="rec-desc">Patients with strong social support manage diabetes significantly better and have better outcomes.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Join a diabetes support group</li>
+          <li>Involve family in your meal planning</li>
+          <li>Consider diabetes coaching or counseling</li>
+          <li>Connect with community health programs</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rec-card" data-cat="monitor">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Monitoring</div>
+        <div class="rec-card-icon">📊</div>
+        <h3>Blood Sugar Monitoring</h3>
+        <p class="rec-desc">Regular monitoring is the cornerstone of diabetes management and helps you make informed decisions.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Check fasting blood sugar every morning</li>
+          <li>Test 2 hours after meals if advised</li>
+          <li>Log readings to spot patterns</li>
+          <li>Ask your doctor about HbA1c every 3 months</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rec-card" data-cat="lifestyle">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Lifestyle</div>
+        <div class="rec-card-icon">🚭</div>
+        <h3>Quit Smoking & Limit Alcohol</h3>
+        <p class="rec-desc">Smoking increases insulin resistance by up to 30–40%; heavy alcohol disrupts glucose regulation significantly.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Seek nicotine replacement therapy</li>
+          <li>Limit alcohol to 1–2 drinks maximum/week</li>
+          <li>Never drink alcohol on an empty stomach</li>
+          <li>Speak with your doctor about cessation aids</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rec-card" data-cat="monitor">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Monitoring</div>
+        <div class="rec-card-icon">🏥</div>
+        <h3>Regular Medical Check-ups</h3>
+        <p class="rec-desc">Preventive screenings catch complications early, when they are still highly treatable and reversible.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Annual eye exam (diabetic retinopathy)</li>
+          <li>Annual kidney function test (urine &amp; blood)</li>
+          <li>Foot exam at every doctor visit</li>
+          <li>Dental cleaning twice per year</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rec-card" data-cat="lifestyle">
+      <div class="rec-card-top">
+        <div class="rec-card-cat">Lifestyle</div>
+        <div class="rec-card-icon">⚖️</div>
+        <h3>Weight Management</h3>
+        <p class="rec-desc">Losing just 5–10% of body weight can reduce HbA1c by 0.5–1.5%, with profound metabolic benefits.</p>
+      </div>
+      <div class="rec-card-bot">
+        <ul>
+          <li>Set realistic goals: 0.5–1 kg loss per week</li>
+          <li>Track meals with a food diary or app</li>
+          <li>Focus on fat loss, not just weight</li>
+          <li>Avoid crash diets — they worsen insulin response</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Treatments Section -->
+  <div class="treatment-section">
+    <div class="stitle">💉 Medical Treatment Options</div>
+    <div class="trt-grid">
+      <div class="trt-card">
+        <div class="trt-badge trt-t1">Type 1 Only</div>
+        <h3>Insulin Therapy (T1D)</h3>
+        <ul>
+          <li>Rapid-acting insulin (Humalog, NovoLog) at meals</li>
+          <li>Long-acting insulin (Lantus, Tresiba) for baseline</li>
+          <li>Insulin pump (CSII) for continuous delivery</li>
+          <li>Closed-loop "artificial pancreas" systems</li>
+          <li>Multiple daily injections (MDI) regimen</li>
+        </ul>
+      </div>
+      <div class="trt-card">
+        <div class="trt-badge trt-t2">Type 2 First-line</div>
+        <h3>Oral Medications (T2D)</h3>
+        <ul>
+          <li>Metformin — reduces liver glucose output</li>
+          <li>SGLT2 inhibitors — increase urinary glucose excretion</li>
+          <li>GLP-1 agonists — enhance insulin, suppress appetite</li>
+          <li>DPP-4 inhibitors — stimulate insulin post-meals</li>
+          <li>Sulfonylureas — stimulate pancreatic insulin release</li>
+        </ul>
+      </div>
+      <div class="trt-card">
+        <div class="trt-badge trt-both">Both Types</div>
+        <h3>Emerging Therapies</h3>
+        <ul>
+          <li>Continuous Glucose Monitors (CGM)</li>
+          <li>Smart insulin pens with dose tracking</li>
+          <li>Pancreatic islet cell transplantation</li>
+          <li>Teplizumab (T1D immune delay drug)</li>
+          <li>Tirzepatide (dual GIP/GLP-1 agonist)</li>
+        </ul>
+      </div>
+      <div class="trt-card">
+        <div class="trt-badge trt-prev">Prevention</div>
+        <h3>Pre-Diabetes Interventions</h3>
+        <ul>
+          <li>Diabetes Prevention Program (DPP) lifestyle plan</li>
+          <li>5–7% body weight reduction goal</li>
+          <li>150 min/week moderate physical activity</li>
+          <li>Metformin (in select high-risk individuals)</li>
+          <li>Regular HbA1c monitoring every 6 months</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Medications Table -->
+  <div class="csec">
+    <div class="stitle">📋 Common Medications at a Glance</div>
+    <div class="med-table">
+      <table>
+        <thead><tr><th>Drug Class</th><th>Example Drugs</th><th>How It Works</th><th>Best For</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Biguanides</strong></td><td>Metformin</td><td>Reduces hepatic glucose production</td><td>T2D first-line</td></tr>
+          <tr><td><strong>SGLT2 Inhibitors</strong></td><td>Empagliflozin, Dapagliflozin</td><td>Excretes excess glucose in urine</td><td>T2D + heart protection</td></tr>
+          <tr><td><strong>GLP-1 Agonists</strong></td><td>Semaglutide, Liraglutide</td><td>Boosts insulin, slows digestion</td><td>T2D + weight loss</td></tr>
+          <tr><td><strong>DPP-4 Inhibitors</strong></td><td>Sitagliptin, Saxagliptin</td><td>Increases incretin hormones</td><td>T2D, lower hypoglycemia risk</td></tr>
+          <tr><td><strong>Sulfonylureas</strong></td><td>Glipizide, Glibenclamide</td><td>Stimulates pancreatic insulin release</td><td>T2D, older patients</td></tr>
+          <tr><td><strong>Insulin</strong></td><td>Glargine, Aspart, Lispro</td><td>Replaces/supplements endogenous insulin</td><td>T1D, advanced T2D</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Action Plan -->
+  <div class="action-plan">
+    <div class="stitle" style="justify-content:center">🗓️ Your 30-Day Action Plan</div>
+    <p style="text-align:center;color:var(--textm);font-size:.9rem;margin-bottom:4px">Start here — small steps lead to lasting change</p>
+    <div class="action-steps">
+      <div class="action-step"><div class="step-num">1</div><h4>Week 1: Awareness</h4><p>Track your meals and water intake. Get a fasting blood sugar reading at a pharmacy or clinic.</p></div>
+      <div class="action-step"><div class="step-num">2</div><h4>Week 2: Movement</h4><p>Begin 10-min walks after breakfast and dinner. Add one fruit or vegetable to each meal.</p></div>
+      <div class="action-step"><div class="step-num">3</div><h4>Week 3: Refine</h4><p>Replace one sugary drink daily with water. Establish a consistent 7-hour sleep routine.</p></div>
+      <div class="action-step"><div class="step-num">4</div><h4>Week 4: Medical</h4><p>Schedule a doctor visit to discuss your risk profile. Request HbA1c and lipid panel tests.</p></div>
+    </div>
+  </div>
+
+  <div class="disc">⚕️ Always consult your physician or a licensed healthcare professional before starting any new treatment, medication, or significant dietary change.</div>
+</div>
+</div>
+
+<!-- ═══ TAB 4: RESEARCHERS ═══ -->
+<div class="tp" id="tab-research">
+<div class="wrap">
+  <div class="res-hero">
+    <div style="font-size:3rem;margin-bottom:12px;position:relative;z-index:1">🔬</div>
+    <h2>For Researchers &amp; Clinicians</h2>
+    <p>Technical reference on diabetes biomarkers, predictive modeling algorithms, research datasets, and current scientific frontiers.</p>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="res-stats">
+    <div class="res-stat"><div class="rs-num">7</div><div class="rs-lbl">PIMA Biomarkers</div></div>
+    <div class="res-stat"><div class="rs-num">6.5%</div><div class="rs-lbl">HbA1c Diabetes Threshold</div></div>
+    <div class="res-stat"><div class="rs-num">768</div><div class="rs-lbl">PIMA Dataset Samples</div></div>
+    <div class="res-stat"><div class="rs-num">94%+</div><div class="rs-lbl">Best ML Model Accuracy</div></div>
+  </div>
+
+  <!-- Biomarkers -->
+  <div class="res-block">
+    <h3>🩺 Clinical Biomarkers — Technical Reference</h3>
+    <div class="biomarker-grid">
+      <div class="bm-card">
+        <h4>Plasma Glucose</h4>
+        <div class="bm-range">Normal: 70–99 mg/dL</div>
+        <p>2-hour oral glucose tolerance test (OGTT) or fasting value. Primary diagnostic criterion. Values ≥126 mg/dL fasting or ≥200 mg/dL post-OGTT confirm diabetes.</p>
+      </div>
+      <div class="bm-card">
+        <h4>Blood Pressure (Systolic)</h4>
+        <div class="bm-range">Normal: &lt;120 mmHg</div>
+        <p>Hypertension (≥130/80) is both a risk factor and complication. ACE inhibitors/ARBs are first-line for diabetic nephropathy with hypertension.</p>
+      </div>
+      <div class="bm-card">
+        <h4>Triceps Skin Fold Thickness</h4>
+        <div class="bm-range">Normal: 10–25 mm</div>
+        <p>Surrogate measure for subcutaneous fat stores, correlates with insulin resistance. Measured using Harpenden calipers at the posterior midline of the upper arm.</p>
+      </div>
+      <div class="bm-card">
+        <h4>2-Hour Serum Insulin</h4>
+        <div class="bm-range">Normal: 10–100 uIU/mL</div>
+        <p>Post-challenge insulin level. Hyperinsulinemia (&gt;160 uIU/mL) indicates insulin resistance (Syndrome X). Used with HOMA-IR: (Glucose × Insulin) / 405.</p>
+      </div>
+      <div class="bm-card">
+        <h4>Body Mass Index</h4>
+        <div class="bm-range">Healthy: 18.5–24.9 kg/m²</div>
+        <p>BMI ≥30 = obesity class I. Waist circumference (&gt;90cm men, &gt;80cm women for Asians) is a superior predictor of visceral adiposity and metabolic risk.</p>
+      </div>
+      <div class="bm-card">
+        <h4>Diabetes Pedigree Function</h4>
+        <div class="bm-range">Low risk: 0.08–0.40</div>
+        <p>A synthesized genetic function from the PIMA dataset that scores hereditary influence based on first and second degree relatives with diabetes. Range: 0.078–2.42.</p>
+      </div>
+      <div class="bm-card">
+        <h4>HbA1c (Glycated Hemoglobin)</h4>
+        <div class="bm-range">Normal: &lt;5.7% | DM: ≥6.5%</div>
+        <p>Reflects average blood glucose over 2–3 months. Gold standard for monitoring. Pre-diabetes: 5.7–6.4%. Not affected by short-term dietary changes or stress.</p>
+      </div>
+      <div class="bm-card">
+        <h4>HOMA-IR Index</h4>
+        <div class="bm-range">Normal: &lt;2.0</div>
+        <p>Homeostatic Model Assessment of Insulin Resistance = (Fasting Glucose mg/dL × Fasting Insulin uIU/mL) / 405. Values &gt;2.5 indicate significant insulin resistance.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ML Models -->
+  <div class="res-block">
+    <h3>🤖 Machine Learning Prediction Models</h3>
+    <div class="alg-grid">
+      <div class="alg-card">
+        <div class="alg-tag">Classification</div>
+        <h4>Random Forest</h4>
+        <p>Ensemble of 100–500 decision trees. Handles non-linear feature interactions and missing data well. Typically achieves 75–82% accuracy on PIMA dataset. Provides feature importance rankings — Glucose and BMI consistently rank #1 and #2.</p>
+      </div>
+      <div class="alg-card">
+        <div class="alg-tag">Deep Learning</div>
+        <h4>Neural Networks (MLP)</h4>
+        <p>Multi-layer perceptrons with 2–4 hidden layers. Best performance on large datasets. Requires normalization and dropout regularization. Achieves 85–90%+ accuracy with sufficient data. Often combined with SMOTE oversampling to address class imbalance.</p>
+      </div>
+      <div class="alg-card">
+        <div class="alg-tag">Gradient Boosting</div>
+        <h4>XGBoost / LightGBM</h4>
+        <p>State-of-the-art on tabular data. XGBoost with hyperparameter tuning achieves 82–88% on PIMA. LightGBM is faster on large datasets. Key hyperparameters: learning rate (0.01–0.3), max_depth (3–8), n_estimators (200–1000).</p>
+      </div>
+      <div class="alg-card">
+        <div class="alg-tag">Probabilistic</div>
+        <h4>Logistic Regression &amp; SVM</h4>
+        <p>Logistic Regression provides interpretable odds ratios per biomarker — useful for clinical communication. SVM with RBF kernel achieves 77–81% accuracy. Both serve as strong baselines and are favored in regulatory/clinical settings for transparency.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Datasets -->
+  <div class="res-block">
+    <h3>🗃️ Key Research Datasets</h3>
+    <div class="dataset-row">
+      <div class="ds-icon">📂</div>
+      <div>
+        <div class="ds-name">PIMA Indians Diabetes Dataset</div>
+        <div class="ds-desc">768 female Pima Native American patients. 8 features, binary outcome. Most benchmarked diabetes ML dataset. Originally from the US National Institute of Diabetes.</div>
+      </div>
+      <div class="ds-tag">UCI ML Repo</div>
+    </div>
+    <div class="dataset-row">
+      <div class="ds-icon">🏥</div>
+      <div>
+        <div class="ds-name">NHANES (National Health and Nutrition Examination Survey)</div>
+        <div class="ds-desc">Large-scale US population survey with metabolic, dietary, and lab data. Ideal for epidemiological modeling of T2D prevalence and risk factors. Updated biennially.</div>
+      </div>
+      <div class="ds-tag">CDC / Public</div>
+    </div>
+    <div class="dataset-row">
+      <div class="ds-icon">🌐</div>
+      <div>
+        <div class="ds-name">IDF Diabetes Atlas Global Dataset</div>
+        <div class="ds-desc">Country-level diabetes prevalence, incidence, and expenditure data. Used for global burden modeling and health policy research. Updated every 2–3 years.</div>
+      </div>
+      <div class="ds-tag">IDF / Open</div>
+    </div>
+    <div class="dataset-row">
+      <div class="ds-icon">🧬</div>
+      <div>
+        <div class="ds-name">UK Biobank — Metabolic Phenotype Cohort</div>
+        <div class="ds-desc">500,000+ participants with genomic, imaging, and metabolic data. Rich resource for GWAS studies on T2D genetic risk variants and polygenic risk scoring.</div>
+      </div>
+      <div class="ds-tag">Application Required</div>
+    </div>
+    <div class="dataset-row">
+      <div class="ds-icon">🌏</div>
+      <div>
+        <div class="ds-name">Philippine PhilHealth NKTI Diabetes Registry</div>
+        <div class="ds-desc">National Kidney and Transplant Institute clinical data on Filipino diabetes patients. Relevant for South/Southeast Asian population-specific risk models given distinct metabolic profiles at lower BMI thresholds.</div>
+      </div>
+      <div class="ds-tag">Institutional Access</div>
+    </div>
+  </div>
+
+  <!-- Recent Research Trends -->
+  <div class="res-block">
+    <h3>📈 Current Research Frontiers</h3>
+    <div class="trend-list">
+      <div class="trend-item">
+        <div class="trend-yr">2022–24</div>
+        <div>
+          <h4>GLP-1 & GIP Dual Agonists (Tirzepatide)</h4>
+          <p>SURPASS trial series demonstrated HbA1c reductions of up to 2.58% and weight loss of 15–22% — outperforming all prior T2D pharmacotherapy. FDA-approved for T2D (2022) and obesity (2023) under brand name Mounjaro/Zepbound.</p>
+        </div>
+      </div>
+      <div class="trend-item">
+        <div class="trend-yr">2023–25</div>
+        <div>
+          <h4>Stem Cell-Derived Beta Cell Transplantation</h4>
+          <p>Vertex Pharmaceuticals' VX-880 trial showed T1D patients achieving insulin independence after islet replacement therapy using pluripotent stem cell-derived beta cells. Could represent a functional cure for Type 1 diabetes.</p>
+        </div>
+      </div>
+      <div class="trend-item">
+        <div class="trend-yr">2023–25</div>
+        <div>
+          <h4>Wearable CGM &amp; AI-Powered Decision Support</h4>
+          <p>Abbott FreeStyle Libre 3 and Dexcom G7 now transmit 1-minute interval data. AI algorithms (e.g., Insulet's SmartAdjust) now predict glucose trajectories 30–60 minutes ahead using LSTM neural networks for closed-loop insulin delivery.</p>
+        </div>
+      </div>
+      <div class="trend-item">
+        <div class="trend-yr">2024–26</div>
+        <div>
+          <h4>Microbiome &amp; T2D Risk Prediction</h4>
+          <p>Gut microbiome composition — particularly Prevotella/Bacteroides ratio — has been shown to predict glucose dysregulation years before clinical onset. Longitudinal studies (MetaHIT, TwinsUK) demonstrate that microbiome diversity may rival genetics as a T2D predictor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Citation Reference -->
+  <div class="res-block">
+    <h3>📖 Standard Citations for This Domain</h3>
+    <div class="cite-box">
+      <span>// APA Format — Key References</span><br><br>
+      American Diabetes Association. (2024). Standards of Medical Care in Diabetes — 2024. <em>Diabetes Care, 47</em>(Suppl. 1), S1–S321.<br><br>
+      Smith, J. W., Everhart, J. E., Dickson, W. C., Knowler, W. C., &amp; Johannes, R. S. (1988). Using the ADAP learning algorithm to forecast the onset of diabetes mellitus. <em>Proceedings of the Symposium on Computer Applications and Medical Care</em>, 261–265.<br><br>
+      International Diabetes Federation. (2021). <em>IDF Diabetes Atlas</em> (10th ed.). https://www.diabetesatlas.org<br><br>
+      Knowler, W. C., et al. (2002). Reduction in the incidence of Type 2 diabetes with lifestyle intervention or metformin. <em>New England Journal of Medicine, 346</em>(6), 393–403.
+    </div>
+  </div>
+
+  <div class="disc">🔬 This section is intended as a reference for researchers, medical students, and healthcare professionals. Clinical decisions must always be guided by licensed clinicians and peer-reviewed evidence.</div>
+</div>
+</div>
+
+<!-- ═══ TAB 5: FUN FACTS ═══ -->
 <div class="tp" id="tab-fun">
 <div class="wrap">
-
   <div class="fhero" style="background:linear-gradient(135deg,#FFB74D,#FF9800,#F57C00)">
     <div style="font-size:3rem;margin-bottom:12px;position:relative;z-index:1">🎯</div>
     <h2>Did You Know?</h2>
     <p>Surprising, little-known, and genuinely fascinating facts about diabetes — history, science, and the human body at its most remarkable.</p>
   </div>
-
-  <!-- History timeline SVG -->
   <div class="csec">
     <div class="stitle" style="justify-content:center;font-size:1.45rem;margin-bottom:28px">⏳ History of Diabetes Discovery</div>
     <svg viewBox="0 0 700 170" width="100%" style="display:block;overflow:visible">
-      <!-- Line -->
       <line x1="50" y1="85" x2="650" y2="85" stroke="#FFE0B2" stroke-width="3"/>
-
-      <!-- 1500 BC -->
       <circle cx="80" cy="85" r="13" fill="#FF9800"/>
       <text x="80" y="52" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="12" fill="#E65100">~1500 BC</text>
       <text x="80" y="112" text-anchor="middle" font-family="Nunito" font-size="9.5" fill="#8D6E63">First recorded</text>
       <text x="80" y="124" text-anchor="middle" font-family="Nunito" font-size="9.5" fill="#8D6E63">mention (Egypt)</text>
       <text x="80" y="142" text-anchor="middle" font-size="16">📜</text>
-
-      <!-- 1889 -->
       <circle cx="240" cy="85" r="13" fill="#FB8C00"/>
       <text x="240" y="52" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="12" fill="#E65100">1889</text>
       <text x="240" y="112" text-anchor="middle" font-family="Nunito" font-size="9.5" fill="#8D6E63">Pancreas–diabetes</text>
       <text x="240" y="124" text-anchor="middle" font-family="Nunito" font-size="9.5" fill="#8D6E63">link confirmed</text>
       <text x="240" y="142" text-anchor="middle" font-size="16">🔬</text>
-
-      <!-- 1921 -->
       <circle cx="400" cy="85" r="13" fill="#F57C00"/>
       <text x="400" y="52" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="12" fill="#E65100">1921</text>
       <text x="400" y="112" text-anchor="middle" font-family="Nunito" font-size="9.5" fill="#8D6E63">Insulin isolated</text>
       <text x="400" y="124" text-anchor="middle" font-family="Nunito" font-size="9.5" fill="#8D6E63">by Banting &amp; Best</text>
       <text x="400" y="142" text-anchor="middle" font-size="16">💉</text>
-
-      <!-- 1982 -->
       <circle cx="545" cy="85" r="13" fill="#E65100"/>
       <text x="545" y="52" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="12" fill="#E65100">1982</text>
       <text x="545" y="112" text-anchor="middle" font-family="Nunito" font-size="9.5" fill="#8D6E63">Synthetic human</text>
       <text x="545" y="124" text-anchor="middle" font-family="Nunito" font-size="9.5" fill="#8D6E63">insulin approved</text>
       <text x="545" y="142" text-anchor="middle" font-size="16">🧬</text>
-
-      <!-- Today -->
       <circle cx="648" cy="85" r="13" fill="#BF360C"/>
       <text x="648" y="52" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="12" fill="#E65100">Today</text>
       <text x="648" y="112" text-anchor="middle" font-family="Nunito" font-size="9.5" fill="#8D6E63">CGMs &amp; smart</text>
@@ -498,7 +1106,6 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
       <text x="648" y="142" text-anchor="middle" font-size="16">📱</text>
     </svg>
   </div>
-
   <div class="ffgrid">
     <div class="ffi"><div class="ffn">01</div><div class="ffc"><h3>🐝 Doctors Once Tasted Urine</h3><p>Ancient physicians literally tasted urine to diagnose diabetes. If it was sweet, the patient had the disease. This is where "mellitus" in diabetes mellitus comes from — it means honey-sweet in Latin.</p></div></div>
     <div class="ffi"><div class="ffn">02</div><div class="ffc"><h3>🐄 It Took 70 Lbs of Pig Pancreas</h3><p>Before synthetic insulin existed, diabetic patients depended on insulin extracted from pig and cattle pancreases. Producing just ¼ oz of usable insulin required around 70 pounds of pig pancreas.</p></div></div>
@@ -515,220 +1122,42 @@ body{font-family:'Nunito',sans-serif;background:var(--o50);color:var(--text);min
     <div class="ffi"><div class="ffn">13</div><div class="ffc"><h3>🐶 Dogs Can Smell Blood Sugar Changes</h3><p>Specially trained diabetic alert dogs can detect the chemical changes in their owner's breath or sweat when blood sugar drops dangerously low — sometimes even before any symptoms appear.</p></div></div>
     <div class="ffi"><div class="ffn">14</div><div class="ffc"><h3>🌊 Hydration Directly Affects Glucose</h3><p>When you're dehydrated, blood becomes more concentrated — which artificially raises blood glucose readings. Drinking adequate water throughout the day is a simple, zero-cost way to help regulate blood sugar levels.</p></div></div>
   </div>
-
   <div class="disc">🎓 Fun facts are sourced from peer-reviewed scientific literature and major medical institutions. Always consult healthcare professionals for personal medical advice.</div>
-
 </div>
 </div>
 
 <script>
-/* ═══════════════════════════════════════
-   QUESTIONS DATABASE
-═══════════════════════════════════════ */
+/* ═══ QUESTIONS ═══ */
 const Q = [
-  {
-    icon:"🥤",q:"How often do you consume sugary drinks (soda, juice, sweetened coffee or tea)?",
-    opts:[
-      {t:"Rarely or never",e:{}},
-      {t:"1–2 times per week",e:{glucose:5,insulin:10}},
-      {t:"3–5 times per week",e:{glucose:12,insulin:20}},
-      {t:"Every day or multiple times a day",e:{glucose:22,insulin:38}}
-    ]
-  },
-  {
-    icon:"🥦",q:"How many servings of fruits and vegetables do you eat per day?",
-    opts:[
-      {t:"5 or more servings (very healthy)",e:{glucose:-5,bmi:-.3}},
-      {t:"3–4 servings",e:{}},
-      {t:"1–2 servings",e:{glucose:5}},
-      {t:"Less than 1 serving",e:{glucose:10,bmi:.5}}
-    ]
-  },
-  {
-    icon:"🏃",q:"How would you describe your physical activity level?",
-    opts:[
-      {t:"Very active — exercise 5+ days per week",e:{bmi:-2,bloodPressure:-10,bodyAge:-3}},
-      {t:"Moderately active — 3–4 days per week",e:{bmi:-.5,bloodPressure:-5,bodyAge:-1}},
-      {t:"Lightly active — 1–2 days per week",e:{bmi:1,bloodPressure:3}},
-      {t:"Sedentary — little to no regular exercise",e:{bmi:3,bloodPressure:12,bodyAge:4}}
-    ]
-  },
-  {
-    icon:"💧",q:"How often do you feel unusually thirsty beyond your normal level?",
-    opts:[
-      {t:"Never — my thirst level seems completely normal",e:{}},
-      {t:"Occasionally — a few times a month",e:{glucose:8}},
-      {t:"Often — several times a week",e:{glucose:18}},
-      {t:"Almost always — persistently and intensely thirsty",e:{glucose:28}}
-    ]
-  },
-  {
-    icon:"🧬",q:"What is your family history with diabetes?",
-    opts:[
-      {t:"No known family history at all",e:{}},
-      {t:"Distant relatives only (grandparents, aunts/uncles)",e:{dpf:.2}},
-      {t:"One parent or one sibling has diabetes",e:{dpf:.5}},
-      {t:"Both parents or multiple close relatives have diabetes",e:{dpf:.9,glucose:8}}
-    ]
-  },
-  {
-    icon:"😴",q:"How many hours of sleep do you typically get per night?",
-    opts:[
-      {t:"7–9 hours (the recommended amount)",e:{}},
-      {t:"6–7 hours",e:{glucose:4,bloodPressure:4}},
-      {t:"5–6 hours",e:{glucose:10,bloodPressure:8,bodyAge:2}},
-      {t:"Less than 5 hours",e:{glucose:18,bloodPressure:15,bodyAge:5}}
-    ]
-  },
-  {
-    icon:"😤",q:"How would you describe your average daily stress level?",
-    opts:[
-      {t:"Low — I feel calm and relaxed most of the time",e:{}},
-      {t:"Moderate — I experience occasional stress",e:{glucose:6,bloodPressure:5}},
-      {t:"High — I'm frequently stressed or anxious",e:{glucose:14,bloodPressure:12,bodyAge:3}},
-      {t:"Very high — I am chronically stressed",e:{glucose:22,bloodPressure:20,insulin:15,bodyAge:6}}
-    ]
-  },
-  {
-    icon:"🍔",q:"How often do you eat fast food or highly processed/packaged foods?",
-    opts:[
-      {t:"Rarely — I mostly cook whole foods at home",e:{bmi:-.5}},
-      {t:"1–2 times per week",e:{bmi:1,glucose:5}},
-      {t:"3–5 times per week",e:{bmi:2.5,glucose:12,bloodPressure:6}},
-      {t:"Daily or nearly every meal is fast food",e:{bmi:5,glucose:20,bloodPressure:12}}
-    ]
-  },
-  {
-    icon:"🚬",q:"Do you smoke or use tobacco products?",
-    opts:[
-      {t:"Never smoked in my life",e:{}},
-      {t:"Former smoker — quit 5+ years ago",e:{bloodPressure:5,bodyAge:1}},
-      {t:"Occasional smoker",e:{bloodPressure:10,bodyAge:3}},
-      {t:"Regular or daily smoker",e:{bloodPressure:18,bodyAge:7,glucose:5}}
-    ]
-  },
-  {
-    icon:"🍺",q:"How often do you consume alcoholic beverages?",
-    opts:[
-      {t:"Never — I don't drink alcohol",e:{}},
-      {t:"Socially — 1–2 times per month",e:{}},
-      {t:"Weekly — 1–3 drinks per week",e:{glucose:5,bloodPressure:5}},
-      {t:"Daily or heavy drinking",e:{glucose:15,bloodPressure:15,insulin:12,bodyAge:4}}
-    ]
-  },
-  {
-    icon:"⚡",q:"How would you describe your energy levels throughout the day?",
-    opts:[
-      {t:"Consistently high — I feel energized all day",e:{}},
-      {t:"Generally good — occasional afternoon dips",e:{glucose:3}},
-      {t:"Often tired or sluggish, especially after meals",e:{glucose:12,insulin:18}},
-      {t:"Chronically fatigued — always low energy",e:{glucose:22,insulin:30}}
-    ]
-  },
-  {
-    icon:"🚻",q:"Do you experience frequent or unusually high amounts of urination?",
-    opts:[
-      {t:"No — completely normal, typical frequency",e:{}},
-      {t:"Slightly more than usual",e:{glucose:10}},
-      {t:"Often, including waking at night to urinate",e:{glucose:22}},
-      {t:"Yes — extremely frequent, impacts daily life",e:{glucose:32}}
-    ]
-  },
-  {
-    icon:"🍽️",q:"What best describes your typical daily diet?",
-    opts:[
-      {t:"Mostly whole foods, vegetables, and lean proteins",e:{glucose:-5,bmi:-.8}},
-      {t:"A balanced mix of whole and processed foods",e:{}},
-      {t:"Mostly refined carbs — white rice, bread, pasta, noodles",e:{glucose:15,insulin:18}},
-      {t:"High sugar and high fat — lots of junk/processed food",e:{glucose:25,bmi:3,insulin:30}}
-    ]
-  },
-  {
-    icon:"🩺",q:"Have you been diagnosed with or are you managing high blood pressure?",
-    opts:[
-      {t:"No — my blood pressure has always been normal",e:{}},
-      {t:"Borderline — I've been told to monitor it",e:{bloodPressure:15}},
-      {t:"Yes — mild hypertension, currently on medication",e:{bloodPressure:28}},
-      {t:"Yes — severe or difficult to control hypertension",e:{bloodPressure:40,bodyAge:4}}
-    ]
-  },
-  {
-    icon:"👁️",q:"How often do you experience dizziness, headaches, or blurred vision?",
-    opts:[
-      {t:"Never",e:{}},
-      {t:"Rarely — once or twice a month",e:{glucose:5,bloodPressure:3}},
-      {t:"Sometimes — a few times a month",e:{glucose:14,bloodPressure:8}},
-      {t:"Frequently — weekly or more often",e:{glucose:24,bloodPressure:15}}
-    ]
-  },
-  {
-    icon:"🩹",q:"How would you describe your skin condition and wound healing?",
-    opts:[
-      {t:"No issues — healthy skin and quick healing",e:{}},
-      {t:"Slightly dry skin, normal healing time",e:{skinThickness:2}},
-      {t:"Dry patches, minor skin darkening, slightly slow healing",e:{skinThickness:7,glucose:8}},
-      {t:"Dark patches (neck/armpits), very slow healing, frequent infections",e:{skinThickness:14,glucose:18}}
-    ]
-  },
-  {
-    icon:"📏",q:"How would you describe your waist and abdominal size?",
-    opts:[
-      {t:"Slim or athletic — flat or toned stomach",e:{bmi:-1.5,skinThickness:-3}},
-      {t:"Average — not particularly large",e:{}},
-      {t:"Slightly above average — visible belly",e:{bmi:2.5,skinThickness:6,insulin:20}},
-      {t:"Significantly above average — large belly or apple-shaped body",e:{bmi:6,skinThickness:12,insulin:35}}
-    ]
-  },
-  {
-    icon:"🍬",q:"Do you frequently crave sweets, sugary snacks, or high-carb foods?",
-    opts:[
-      {t:"Never — I have no strong sugar cravings",e:{}},
-      {t:"Occasionally — once or twice a week",e:{glucose:5,insulin:8}},
-      {t:"Often — most days I want something sweet",e:{glucose:12,insulin:18}},
-      {t:"Almost always — constant, intense cravings",e:{glucose:20,insulin:28}}
-    ]
-  },
-  {
-    icon:"🔬",q:"Have you ever been told your blood sugar was elevated?",
-    opts:[
-      {t:"Never — always within normal range",e:{}},
-      {t:"Once — but it normalized on its own",e:{glucose:15,insulin:12}},
-      {t:"A few times — borderline or pre-diabetic range",e:{glucose:28,insulin:25}},
-      {t:"Yes, regularly elevated / confirmed pre-diabetes",e:{glucose:40,insulin:40,dpf:.2}}
-    ]
-  },
-  {
-    icon:"🪞",q:"Compared to your actual age, how old do you feel physically and mentally?",
-    opts:[
-      {t:"Much younger — vibrant, fit, and energetic",e:{bodyAge:-4}},
-      {t:"About my age — feels right for my years",e:{}},
-      {t:"A bit older — some wear, stiffness, or chronic fatigue",e:{bodyAge:3}},
-      {t:"Much older — I feel significantly worn out and aged",e:{bodyAge:8,glucose:5,bloodPressure:5}}
-    ]
-  }
+  {icon:"🥤",q:"How often do you consume sugary drinks (soda, juice, sweetened coffee or tea)?",opts:[{t:"Rarely or never",e:{}},{t:"1–2 times per week",e:{glucose:5,insulin:10}},{t:"3–5 times per week",e:{glucose:12,insulin:20}},{t:"Every day or multiple times a day",e:{glucose:22,insulin:38}}]},
+  {icon:"🥦",q:"How many servings of fruits and vegetables do you eat per day?",opts:[{t:"5 or more servings (very healthy)",e:{glucose:-5,bmi:-.3}},{t:"3–4 servings",e:{}},{t:"1–2 servings",e:{glucose:5}},{t:"Less than 1 serving",e:{glucose:10,bmi:.5}}]},
+  {icon:"🏃",q:"How would you describe your physical activity level?",opts:[{t:"Very active — exercise 5+ days per week",e:{bmi:-2,bloodPressure:-10,bodyAge:-3}},{t:"Moderately active — 3–4 days per week",e:{bmi:-.5,bloodPressure:-5,bodyAge:-1}},{t:"Lightly active — 1–2 days per week",e:{bmi:1,bloodPressure:3}},{t:"Sedentary — little to no regular exercise",e:{bmi:3,bloodPressure:12,bodyAge:4}}]},
+  {icon:"💧",q:"How often do you feel unusually thirsty beyond your normal level?",opts:[{t:"Never — my thirst level seems completely normal",e:{}},{t:"Occasionally — a few times a month",e:{glucose:8}},{t:"Often — several times a week",e:{glucose:18}},{t:"Almost always — persistently and intensely thirsty",e:{glucose:28}}]},
+  {icon:"🧬",q:"What is your family history with diabetes?",opts:[{t:"No known family history at all",e:{}},{t:"Distant relatives only (grandparents, aunts/uncles)",e:{dpf:.2}},{t:"One parent or one sibling has diabetes",e:{dpf:.5}},{t:"Both parents or multiple close relatives have diabetes",e:{dpf:.9,glucose:8}}]},
+  {icon:"😴",q:"How many hours of sleep do you typically get per night?",opts:[{t:"7–9 hours (the recommended amount)",e:{}},{t:"6–7 hours",e:{glucose:4,bloodPressure:4}},{t:"5–6 hours",e:{glucose:10,bloodPressure:8,bodyAge:2}},{t:"Less than 5 hours",e:{glucose:18,bloodPressure:15,bodyAge:5}}]},
+  {icon:"😤",q:"How would you describe your average daily stress level?",opts:[{t:"Low — I feel calm and relaxed most of the time",e:{}},{t:"Moderate — I experience occasional stress",e:{glucose:6,bloodPressure:5}},{t:"High — I'm frequently stressed or anxious",e:{glucose:14,bloodPressure:12,bodyAge:3}},{t:"Very high — I am chronically stressed",e:{glucose:22,bloodPressure:20,insulin:15,bodyAge:6}}]},
+  {icon:"🍔",q:"How often do you eat fast food or highly processed/packaged foods?",opts:[{t:"Rarely — I mostly cook whole foods at home",e:{bmi:-.5}},{t:"1–2 times per week",e:{bmi:1,glucose:5}},{t:"3–5 times per week",e:{bmi:2.5,glucose:12,bloodPressure:6}},{t:"Daily or nearly every meal is fast food",e:{bmi:5,glucose:20,bloodPressure:12}}]},
+  {icon:"🚬",q:"Do you smoke or use tobacco products?",opts:[{t:"Never smoked in my life",e:{}},{t:"Former smoker — quit 5+ years ago",e:{bloodPressure:5,bodyAge:1}},{t:"Occasional smoker",e:{bloodPressure:10,bodyAge:3}},{t:"Regular or daily smoker",e:{bloodPressure:18,bodyAge:7,glucose:5}}]},
+  {icon:"🍺",q:"How often do you consume alcoholic beverages?",opts:[{t:"Never — I don't drink alcohol",e:{}},{t:"Socially — 1–2 times per month",e:{}},{t:"Weekly — 1–3 drinks per week",e:{glucose:5,bloodPressure:5}},{t:"Daily or heavy drinking",e:{glucose:15,bloodPressure:15,insulin:12,bodyAge:4}}]},
+  {icon:"⚡",q:"How would you describe your energy levels throughout the day?",opts:[{t:"Consistently high — I feel energized all day",e:{}},{t:"Generally good — occasional afternoon dips",e:{glucose:3}},{t:"Often tired or sluggish, especially after meals",e:{glucose:12,insulin:18}},{t:"Chronically fatigued — always low energy",e:{glucose:22,insulin:30}}]},
+  {icon:"🚻",q:"Do you experience frequent or unusually high amounts of urination?",opts:[{t:"No — completely normal, typical frequency",e:{}},{t:"Slightly more than usual",e:{glucose:10}},{t:"Often, including waking at night to urinate",e:{glucose:22}},{t:"Yes — extremely frequent, impacts daily life",e:{glucose:32}}]},
+  {icon:"🍽️",q:"What best describes your typical daily diet?",opts:[{t:"Mostly whole foods, vegetables, and lean proteins",e:{glucose:-5,bmi:-.8}},{t:"A balanced mix of whole and processed foods",e:{}},{t:"Mostly refined carbs — white rice, bread, pasta, noodles",e:{glucose:15,insulin:18}},{t:"High sugar and high fat — lots of junk/processed food",e:{glucose:25,bmi:3,insulin:30}}]},
+  {icon:"🩺",q:"Have you been diagnosed with or are you managing high blood pressure?",opts:[{t:"No — my blood pressure has always been normal",e:{}},{t:"Borderline — I've been told to monitor it",e:{bloodPressure:15}},{t:"Yes — mild hypertension, currently on medication",e:{bloodPressure:28}},{t:"Yes — severe or difficult to control hypertension",e:{bloodPressure:40,bodyAge:4}}]},
+  {icon:"👁️",q:"How often do you experience dizziness, headaches, or blurred vision?",opts:[{t:"Never",e:{}},{t:"Rarely — once or twice a month",e:{glucose:5,bloodPressure:3}},{t:"Sometimes — a few times a month",e:{glucose:14,bloodPressure:8}},{t:"Frequently — weekly or more often",e:{glucose:24,bloodPressure:15}}]},
+  {icon:"🩹",q:"How would you describe your skin condition and wound healing?",opts:[{t:"No issues — healthy skin and quick healing",e:{}},{t:"Slightly dry skin, normal healing time",e:{skinThickness:2}},{t:"Dry patches, minor skin darkening, slightly slow healing",e:{skinThickness:7,glucose:8}},{t:"Dark patches (neck/armpits), very slow healing, frequent infections",e:{skinThickness:14,glucose:18}}]},
+  {icon:"📏",q:"How would you describe your waist and abdominal size?",opts:[{t:"Slim or athletic — flat or toned stomach",e:{bmi:-1.5,skinThickness:-3}},{t:"Average — not particularly large",e:{}},{t:"Slightly above average — visible belly",e:{bmi:2.5,skinThickness:6,insulin:20}},{t:"Significantly above average — large belly or apple-shaped body",e:{bmi:6,skinThickness:12,insulin:35}}]},
+  {icon:"🍬",q:"Do you frequently crave sweets, sugary snacks, or high-carb foods?",opts:[{t:"Never — I have no strong sugar cravings",e:{}},{t:"Occasionally — once or twice a week",e:{glucose:5,insulin:8}},{t:"Often — most days I want something sweet",e:{glucose:12,insulin:18}},{t:"Almost always — constant, intense cravings",e:{glucose:20,insulin:28}}]},
+  {icon:"🔬",q:"Have you ever been told your blood sugar was elevated?",opts:[{t:"Never — always within normal range",e:{}},{t:"Once — but it normalized on its own",e:{glucose:15,insulin:12}},{t:"A few times — borderline or pre-diabetic range",e:{glucose:28,insulin:25}},{t:"Yes, regularly elevated / confirmed pre-diabetes",e:{glucose:40,insulin:40,dpf:.2}}]},
+  {icon:"🪞",q:"Compared to your actual age, how old do you feel physically and mentally?",opts:[{t:"Much younger — vibrant, fit, and energetic",e:{bodyAge:-4}},{t:"About my age — feels right for my years",e:{}},{t:"A bit older — some wear, stiffness, or chronic fatigue",e:{bodyAge:3}},{t:"Much older — I feel significantly worn out and aged",e:{bodyAge:8,glucose:5,bloodPressure:5}}]}
 ];
 
-/* ═══════════════════════════════════════
-   STATE
-═══════════════════════════════════════ */
-let curQ=0, answers=new Array(20).fill(null), uName='', uAge=0;
+/* ═══ STATE ═══ */
+let curQ=0,answers=new Array(20).fill(null),uName='',uAge=0;
 
-/* ═══════════════════════════════════════
-   PARTICLES
-═══════════════════════════════════════ */
-(function(){
-  const c=document.getElementById('pts');
-  for(let i=0;i<14;i++){
-    const p=document.createElement('div'); p.className='pt';
-    const s=Math.random()*90+20;
-    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*20+16}s;animation-delay:${Math.random()*18}s`;
-    c.appendChild(p);
-  }
-})();
+/* ═══ PARTICLES ═══ */
+(function(){const c=document.getElementById('pts');for(let i=0;i<14;i++){const p=document.createElement('div');p.className='pt';const s=Math.random()*90+20;p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*20+16}s;animation-delay:${Math.random()*18}s`;c.appendChild(p);}})();
 
-/* ═══════════════════════════════════════
-   TABS
-═══════════════════════════════════════ */
+/* ═══ TABS ═══ */
 document.querySelectorAll('.tbtn').forEach(b=>{
   b.addEventListener('click',()=>{
     const t=b.dataset.tab;
@@ -740,9 +1169,7 @@ document.querySelectorAll('.tbtn').forEach(b=>{
   });
 });
 
-/* ═══════════════════════════════════════
-   START TEST
-═══════════════════════════════════════ */
+/* ═══ START ═══ */
 function startTest(){
   const n=document.getElementById('iname').value.trim();
   const a=parseInt(document.getElementById('iage').value);
@@ -752,55 +1179,87 @@ function startTest(){
   if(!a||a<10||a>110){document.getElementById('iage').classList.add('err');ok=false;}
   else document.getElementById('iage').classList.remove('err');
   if(!ok) return;
-  uName=n; uAge=a; curQ=0; answers=new Array(20).fill(null);
+  uName=n;uAge=a;curQ=0;answers=new Array(20).fill(null);
   document.getElementById('intro').style.display='none';
   document.getElementById('qscr').style.display='block';
   renderQ();
 }
 
-/* ═══════════════════════════════════════
-   RENDER QUESTION
-═══════════════════════════════════════ */
+/* ═══ RENDER QUESTION ═══ */
 function renderQ(){
   const q=Q[curQ];
   document.getElementById('qctr').textContent=`Question ${curQ+1} of 20`;
   document.getElementById('qtxt').innerHTML=`<span style="margin-right:9px;font-size:1.7rem">${q.icon}</span>${q.q}`;
   document.getElementById('pfill').style.width=((curQ+1)/20*100)+'%';
-
   const ltrs=['A','B','C','D'];
   document.getElementById('opts').innerHTML=q.opts.map((o,i)=>`
     <button class="opt${answers[curQ]===i?' sel':''}" onclick="selOpt(${i})">
       <span class="oltr">${ltrs[i]}</span>${o.t}
     </button>`).join('');
-
   const nb=document.getElementById('bnext');
   const hasAns=answers[curQ]!==null;
   nb.classList.toggle('on',hasAns);
   nb.textContent=curQ===19?'See My Results →':'Next →';
   document.getElementById('bback').style.visibility=curQ===0?'hidden':'visible';
-
   const sc=document.getElementById('qscr');
-  sc.style.animation='none'; sc.offsetHeight; sc.style.animation='slideR .4s cubic-bezier(.34,1.56,.64,1)';
+  sc.style.animation='none';sc.offsetHeight;sc.style.animation='slideR .4s cubic-bezier(.34,1.56,.64,1)';
 }
-
 function selOpt(i){answers[curQ]=i;renderQ();}
-
 function nextQ(){
   if(answers[curQ]===null) return;
-  if(curQ===19){showResults();}
+  if(curQ===19){startLoading();}
   else{curQ++;renderQ();}
 }
 function prevQ(){if(curQ>0){curQ--;renderQ();}}
 
-/* ═══════════════════════════════════════
-   CALCULATE
-═══════════════════════════════════════ */
+/* ═══ LOADING ANIMATION (10 seconds) ═══ */
+function startLoading(){
+  document.getElementById('qscr').style.display='none';
+  const ld=document.getElementById('loading-screen');
+  ld.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  const steps=[
+    {id:'ls1',delay:800},
+    {id:'ls2',delay:2400},
+    {id:'ls3',delay:4400},
+    {id:'ls4',delay:6600},
+    {id:'ls5',delay:8600}
+  ];
+
+  steps.forEach(s=>{
+    setTimeout(()=>{
+      document.getElementById(s.id).classList.add('done');
+    },s.delay);
+  });
+
+  // Animated progress bar & percentage counter
+  const bar=document.getElementById('lbar');
+  const pct=document.getElementById('lpct');
+  const total=10000;
+  const start=Date.now();
+  function tick(){
+    const elapsed=Date.now()-start;
+    const p=Math.min(100,Math.round((elapsed/total)*100));
+    bar.style.width=p+'%';
+    pct.textContent=p+'%';
+    if(p<100){requestAnimationFrame(tick);}
+  }
+  requestAnimationFrame(tick);
+
+  setTimeout(()=>{
+    ld.style.display='none';
+    showResults();
+  },10000);
+}
+
+/* ═══ CALCULATE ═══ */
 function calc(){
   const v={glucose:90,bloodPressure:118,skinThickness:18,insulin:85,bmi:23.5,dpf:.25,bodyAge:uAge};
   answers.forEach((ai,qi)=>{
     if(ai===null) return;
     const fx=Q[qi].opts[ai].e;
-    Object.keys(fx).forEach(k=>{if(v[k]!==undefined) v[k]+=fx[k];});
+    Object.keys(fx).forEach(k=>{if(v[k]!==undefined)v[k]+=fx[k];});
   });
   v.glucose=clamp(Math.round(v.glucose),65,280);
   v.bloodPressure=clamp(Math.round(v.bloodPressure),90,200);
@@ -813,16 +1272,21 @@ function calc(){
 }
 function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
 
-function risk(v){
-  let s=0;
-  if(v.glucose>125) s+=2; else if(v.glucose>99) s+=1;
-  if(v.bloodPressure>140) s+=2; else if(v.bloodPressure>130) s+=1;
-  if(v.bmi>30) s+=2; else if(v.bmi>25) s+=1;
-  if(v.insulin>160) s+=2; else if(v.insulin>100) s+=1;
-  if(v.dpf>.8) s+=2; else if(v.dpf>.4) s+=1;
-  if(v.skinThickness>35) s+=1;
-  if(v.bodyAge>uAge+5) s+=1;
-  return s>=8?'high':s>=4?'moderate':'low';
+function riskScore(v){
+  let s=0,max=14;
+  if(v.glucose>125)s+=3;else if(v.glucose>99)s+=1.5;
+  if(v.bloodPressure>140)s+=2;else if(v.bloodPressure>130)s+=1;
+  if(v.bmi>30)s+=2.5;else if(v.bmi>25)s+=1.2;
+  if(v.insulin>160)s+=2;else if(v.insulin>100)s+=1;
+  if(v.dpf>.8)s+=2;else if(v.dpf>.4)s+=1;
+  if(v.skinThickness>35)s+=1;
+  if(v.bodyAge>uAge+5)s+=1.5;
+  const pct=Math.min(98,Math.max(3,Math.round((s/max)*100)));
+  let level;
+  if(pct>=60)level='high';
+  else if(pct>=30)level='moderate';
+  else level='low';
+  return{pct,level};
 }
 
 function mstatus(key,val){
@@ -836,22 +1300,22 @@ function mstatus(key,val){
     bodyAge:{n:[uAge-5,uAge+3],m:[uAge+4,uAge+8]}
   };
   const r=rng[key];
-  if(!r) return 'normal';
-  if(val>=r.n[0]&&val<=r.n[1]) return 'normal';
-  if(val>=r.m[0]&&val<=r.m[1]) return 'moderate';
-  return 'high';
+  if(!r)return'normal';
+  if(val>=r.n[0]&&val<=r.n[1])return'normal';
+  if(val>=r.m[0]&&val<=r.m[1])return'moderate';
+  return'high';
 }
 
-/* ═══════════════════════════════════════
-   SHOW RESULTS
-═══════════════════════════════════════ */
+/* ═══ SHOW RESULTS ═══ */
 function showResults(){
-  document.getElementById('qscr').style.display='none';
   const rd=document.getElementById('rscr');
   rd.style.display='block';
-
   const v=calc();
-  const rl=risk(v);
+  const{pct,level}=riskScore(v);
+  const rl=level;
+
+  const gColors={low:'#43A047',moderate:'#FFB300',high:'#F44336'};
+  const gc=gColors[rl];
 
   const rlabel={low:'🟢 Low Risk',moderate:'🟡 Moderate Risk',high:'🔴 High Risk'}[rl];
   const rmsg={
@@ -861,37 +1325,71 @@ function showResults(){
   }[rl];
 
   const metrics=[
-    {key:'glucose',   lbl:'Estimated Glucose',     val:v.glucose,       unit:'mg/dL',  icon:'🩸', nr:'70–99 mg/dL',    max:280},
-    {key:'bloodPressure',lbl:'Blood Pressure (Sys)',val:v.bloodPressure, unit:'mmHg',   icon:'💓', nr:'90–120 mmHg',    max:200},
-    {key:'skinThickness',lbl:'Skin Thickness',      val:v.skinThickness, unit:'mm',     icon:'🖐️', nr:'10–25 mm',        max:62},
-    {key:'insulin',   lbl:'Insulin Level',          val:v.insulin,       unit:'uIU/mL', icon:'💉', nr:'10–100 uIU/mL',  max:600},
-    {key:'bmi',       lbl:'Body Mass Index',        val:v.bmi,           unit:'kg/m²',  icon:'⚖️', nr:'18.5–24.9',       max:50},
-    {key:'dpf',       lbl:'Diabetes Pedigree Fn.',  val:v.dpf,           unit:'score',  icon:'🧬', nr:'0.08–0.40',       max:2.5},
-    {key:'bodyAge',   lbl:'Estimated Body Age',     val:v.bodyAge,       unit:'years',  icon:'⏳', nr:`≈${uAge} years`,  max:100}
+    {key:'glucose',lbl:'Estimated Glucose',val:v.glucose,unit:'mg/dL',icon:'🩸',nr:'70–99 mg/dL',max:280},
+    {key:'bloodPressure',lbl:'Blood Pressure (Sys)',val:v.bloodPressure,unit:'mmHg',icon:'💓',nr:'90–120 mmHg',max:200},
+    {key:'skinThickness',lbl:'Skin Thickness',val:v.skinThickness,unit:'mm',icon:'🖐️',nr:'10–25 mm',max:62},
+    {key:'insulin',lbl:'Insulin Level',val:v.insulin,unit:'uIU/mL',icon:'💉',nr:'10–100 uIU/mL',max:600},
+    {key:'bmi',lbl:'Body Mass Index',val:v.bmi,unit:'kg/m²',icon:'⚖️',nr:'18.5–24.9',max:50},
+    {key:'dpf',lbl:'Diabetes Pedigree Fn.',val:v.dpf,unit:'score',icon:'🧬',nr:'0.08–0.40',max:2.5},
+    {key:'bodyAge',lbl:'Estimated Body Age',val:v.bodyAge,unit:'years',icon:'⏳',nr:`≈${uAge} years`,max:100}
   ];
+
+  // Gauge SVG — semicircle meter
+  const angle=(pct/100)*180;
+  const rad=(angle-90)*Math.PI/180;
+  const gx=100+80*Math.cos(rad), gy=100+80*Math.sin(rad);
+  const largeArc=angle>180?1:0;
 
   rd.innerHTML=`
   <div style="animation:fadeUp .6s ease">
-
     <div class="rhero">
-      <div style="font-size:3.2rem;margin-bottom:10px;animation:fadeUp .6s ease">🎯</div>
+      <div style="font-size:3.2rem;margin-bottom:10px">🎯</div>
       <h2>Results for ${uName}</h2>
       <p>Age: ${uAge} years old &nbsp;·&nbsp; Based on your 20 responses</p>
       <div class="rbadge r${rl.slice(0,3)}">${rlabel}</div>
       <p style="margin-top:14px;font-size:.92rem;opacity:.87;max-width:520px;margin-left:auto;margin-right:auto">${rmsg}</p>
     </div>
 
+    <!-- RISK GAUGE -->
+    <div class="risk-gauge-wrap">
+      <div class="gauge-title">⚠️ Overall Diabetes Risk Score</div>
+      <svg class="gauge-svg" viewBox="0 0 200 120" width="320">
+        <!-- Background arc -->
+        <path d="M20,100 A80,80 0 0,1 180,100" fill="none" stroke="#FFE8CC" stroke-width="18" stroke-linecap="round"/>
+        <!-- Green zone -->
+        <path d="M20,100 A80,80 0 0,1 80,27" fill="none" stroke="#C8E6C9" stroke-width="18" stroke-linecap="round" opacity=".6"/>
+        <!-- Yellow zone -->
+        <path d="M80,27 A80,80 0 0,1 140,27" fill="none" stroke="#FFF9C4" stroke-width="18" stroke-linecap="round" opacity=".7"/>
+        <!-- Red zone -->
+        <path d="M140,27 A80,80 0 0,1 180,100" fill="none" stroke="#FFCCBC" stroke-width="18" stroke-linecap="round" opacity=".7"/>
+        <!-- Progress arc -->
+        <path id="gauge-arc" d="M20,100 A80,80 0 ${largeArc},1 ${gx.toFixed(1)},${gy.toFixed(1)}" fill="none" stroke="${gc}" stroke-width="18" stroke-linecap="round" style="transition:stroke-dasharray 1.5s"/>
+        <!-- Needle dot -->
+        <circle cx="${gx.toFixed(1)}" cy="${gy.toFixed(1)}" r="8" fill="${gc}" stroke="white" stroke-width="2.5"/>
+        <!-- Labels -->
+        <text x="15" y="118" font-family="Nunito" font-size="9" fill="#66BB6A" font-weight="800">LOW</text>
+        <text x="87" y="22" text-anchor="middle" font-family="Nunito" font-size="9" fill="#FFB300" font-weight="800">MOD</text>
+        <text x="178" y="118" text-anchor="end" font-family="Nunito" font-size="9" fill="#F44336" font-weight="800">HIGH</text>
+        <!-- Center percentage -->
+        <text x="100" y="90" text-anchor="middle" font-family="Playfair Display" font-size="28" font-weight="700" fill="${gc}">${pct}%</text>
+        <text x="100" y="108" text-anchor="middle" font-family="Nunito" font-size="10" fill="#A1887F" font-weight="800">RISK SCORE</text>
+      </svg>
+      <p style="color:var(--textm);font-size:.86rem;margin-top:10px;max-width:380px;margin-left:auto;margin-right:auto">
+        Based on 7 biomarker estimates from your lifestyle responses. <strong style="color:${gc}">${pct}% estimated diabetes risk</strong> — this is an educational estimate, not a clinical diagnosis.
+      </p>
+    </div>
+
     <div class="mgrid">
       ${metrics.map(m=>{
         const st=mstatus(m.key,m.val);
-        const pct=Math.min(100,(m.val/m.max)*100).toFixed(1);
+        const pct2=Math.min(100,(m.val/m.max)*100).toFixed(1);
         const bc={normal:'bn',moderate:'bm',high:'bh'}[st];
-        return `<div class="mcard">
+        return`<div class="mcard">
           <div class="mica">${m.icon}</div>
           <div class="mlbl">${m.lbl}</div>
           <div class="mval">${m.val} <span class="munit">${m.unit}</span></div>
           <div class="mnorm">Normal: ${m.nr}</div>
-          <div class="mbar"><div class="mbf ${bc}" data-pct="${pct}"></div></div>
+          <div class="mbar"><div class="mbf ${bc}" data-pct="${pct2}"></div></div>
         </div>`;
       }).join('')}
     </div>
@@ -910,7 +1408,7 @@ function showResults(){
             const st=mstatus(m.key,m.val);
             const dc={normal:'dn',moderate:'dm',high:'dh'}[st];
             const sl={normal:'Normal',moderate:'Elevated',high:'High Risk'}[st];
-            return `<tr>
+            return`<tr>
               <td>${m.icon} <strong>${m.lbl}</strong></td>
               <td><strong>${m.val}</strong> ${m.unit}</td>
               <td>${m.nr}</td>
@@ -929,65 +1427,52 @@ function showResults(){
     <div class="disc">⚠️ These are <strong>estimates based on lifestyle factors only</strong>, not clinical measurements. This tool is for educational awareness. Consult a licensed physician for accurate medical diagnosis.</div>
   </div>`;
 
-  // Animate bars
   setTimeout(()=>{
     document.querySelectorAll('.mbf').forEach(b=>{
       const target=b.dataset.pct+'%';
       b.style.width='0';
-      requestAnimationFrame(()=>requestAnimationFrame(()=>{ b.style.width=target; }));
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{b.style.width=target;}));
     });
   },300);
 
-  // Radar chart
   setTimeout(()=>{
     const ctx=document.getElementById('rdr');
-    if(!ctx) return;
+    if(!ctx)return;
     const labels=metrics.map(m=>m.lbl.replace('Estimated ','').replace(' (Sys)','').replace(' Function','').replace(' Function.',''));
-    const norm=(key,val)=>Math.min(100,Math.round((val/metrics.find(m=>m.key===key).max)*100));
-    const data=metrics.map(m=>norm(m.key,m.val));
-
+    const data=metrics.map(m=>Math.min(100,Math.round((m.val/m.max)*100)));
     new Chart(ctx,{
       type:'radar',
-      data:{
-        labels,
-        datasets:[{
-          label:uName+"'s Profile",
-          data,fill:true,
-          backgroundColor:'rgba(255,152,0,.17)',
-          borderColor:'#FF9800',
-          pointBackgroundColor:'#FF9800',
-          pointBorderColor:'#fff',
-          pointHoverBackgroundColor:'#fff',
-          pointHoverBorderColor:'#FF9800',
-          borderWidth:2.5,pointRadius:5
-        }]
-      },
-      options:{
-        responsive:true,
-        animation:{duration:1400,easing:'easeInOutQuart'},
-        scales:{r:{
-          beginAtZero:true,max:100,
-          ticks:{display:false},
-          grid:{color:'#FFE0B2'},
-          angleLines:{color:'#FFE0B2'},
-          pointLabels:{font:{family:'Nunito',size:11,weight:'700'},color:'#6D4C41'}
-        }},
-        plugins:{
-          legend:{display:false},
-          tooltip:{callbacks:{label:c=>{const m=metrics[c.dataIndex];return ` ${m.val} ${m.unit}`;}}}
-        }
-      }
+      data:{labels,datasets:[{label:uName+"'s Profile",data,fill:true,
+        backgroundColor:'rgba(255,152,0,.17)',borderColor:'#FF9800',
+        pointBackgroundColor:'#FF9800',pointBorderColor:'#fff',
+        pointHoverBackgroundColor:'#fff',pointHoverBorderColor:'#FF9800',
+        borderWidth:2.5,pointRadius:5}]},
+      options:{responsive:true,animation:{duration:1400,easing:'easeInOutQuart'},
+        scales:{r:{beginAtZero:true,max:100,ticks:{display:false},
+          grid:{color:'#FFE0B2'},angleLines:{color:'#FFE0B2'},
+          pointLabels:{font:{family:'Nunito',size:11,weight:'700'},color:'#6D4C41'}}},
+        plugins:{legend:{display:false},
+          tooltip:{callbacks:{label:c=>{const m=metrics[c.dataIndex];return ` ${m.val} ${m.unit}`;}}}}}
     });
   },500);
 }
 
 function retake(){
-  curQ=0; answers=new Array(20).fill(null);
+  curQ=0;answers=new Array(20).fill(null);
   document.getElementById('rscr').style.display='none';
   document.getElementById('intro').style.display='block';
   document.getElementById('iname').value='';
   document.getElementById('iage').value='';
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ═══ RECOMMENDATION FILTER ═══ */
+function filterRec(cat,btn){
+  document.querySelectorAll('.rfbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#rec-grid .rec-card').forEach(c=>{
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none';
+  });
 }
 </script>
 </body>
